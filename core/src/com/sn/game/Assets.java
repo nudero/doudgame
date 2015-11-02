@@ -27,7 +27,7 @@ public class Assets {
 	public static Animation throwAnim;
 	public static Animation lookAnim;
 	public static Animation hittedAnim;
-	public static Animation platform;
+	public static TextureRegion platform;
 	public static Animation breakingPlatform;
 
 	public static Music music;
@@ -49,7 +49,8 @@ public class Assets {
 		soundOff = new TextureRegion(items, 0, 0, 64, 64);
 		soundOn = new TextureRegion(items, 64, 0, 64, 64);
 		arrow = new TextureRegion(items, 0, 64, 64, 64);
-
+		platform = new TextureRegion(items, 64, 160, 64, 16);
+		
 		idleAnim = new Animation(0.2f,
 				new TextureRegion(items, 0, 128, 32, 32), new TextureRegion(
 						items, 32, 128, 32, 32));
@@ -58,8 +59,7 @@ public class Assets {
 						items, 96, 128, 32, 32));
 		hittedAnim = new Animation(0.2f, new TextureRegion(items, 128, 128, 32,
 				32));
-		platform = new Animation(0.2f,
-				new TextureRegion(items, 64, 160, 64, 16));
+//		platform = new Animation(0.2f,new TextureRegion(items, 64, 160, 64, 16));
 		breakingPlatform = new Animation(0.2f, new TextureRegion(items, 64,
 				160, 64, 16), new TextureRegion(items, 64, 176, 64, 16),
 				new TextureRegion(items, 64, 192, 64, 16), new TextureRegion(

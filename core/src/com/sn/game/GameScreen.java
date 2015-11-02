@@ -6,6 +6,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.sn.game.system.BackgroundSystem;
+import com.sn.game.system.MovementSystem;
+import com.sn.game.system.PlatformSystem;
 import com.sn.game.system.RenderingSystem;
 
 public class GameScreen extends ScreenAdapter {
@@ -27,6 +29,8 @@ public class GameScreen extends ScreenAdapter {
 		engine.addSystem(new BackgroundSystem());
 		engine.addSystem(new RenderingSystem(game.batcher));
 		engine.addSystem(new AnimationSystem());
+		engine.addSystem(new MovementSystem());
+		engine.addSystem(new PlatformSystem());
 		engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 		world.create();
 	}

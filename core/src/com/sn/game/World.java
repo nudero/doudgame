@@ -1,17 +1,26 @@
 package com.sn.game;
 
+import java.util.Random;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.sn.game.component.AnimationComponent;
 import com.sn.game.component.BackgroundComponent;
 import com.sn.game.component.BobComponent;
 import com.sn.game.component.BoundsComponent;
+import com.sn.game.component.MovementComponent;
+import com.sn.game.component.PlatformComponent;
 import com.sn.game.component.StateComponent;
 import com.sn.game.component.TextureComponent;
 import com.sn.game.component.TransformComponent;
 
 public class World {
 
+	public static final float WORLD_WIDTH = 10;
+	public static final float WORLD_HEIGHT = 15 * 20;
+	
+	public final Random rand = new Random();
+	
 	PooledEngine engine;
 	
 	public World(PooledEngine engine) {
@@ -20,7 +29,36 @@ public class World {
 	
 	public void create() {
 		createBob();
+		createBall();
 		createBackground();
+		createPlatform();
+	}
+	
+	public void createBall() {
+		
+	}
+	
+	public void createPlatform() {
+		Entity entity = engine.createEntity();
+		TextureComponent texture = engine.createComponent(TextureComponent.class);
+		TransformComponent transform = engine.createComponent(TransformComponent.class);
+		BoundsComponent bounds = engine.createComponent(BoundsComponent.class);
+		PlatformComponent platform = engine.createComponent(PlatformComponent.class);
+		MovementComponent movement = engine.createComponent(MovementComponent.class);
+		texture.region = Assets.platform;
+		platform.width = texture.region.getRegionWidth()/32.0f;
+		platform.height = texture.region.getRegionHeight()/32.0f;
+		platform.velocity = 4;
+		transform.pos.set(5.0f, 8.0f, 0);
+		movement.velocity.x = rand.nextBoolean()?platform.velocity:-platform.velocity;
+
+		entity.add(platform);
+		entity.add(texture);
+		entity.add(transform);
+		entity.add(bounds);
+		entity.add(movement);
+		
+		engine.addEntity(entity);
 	}
 	
 	private void createBackground() {
