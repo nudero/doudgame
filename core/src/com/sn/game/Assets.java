@@ -22,6 +22,7 @@ public class Assets {
 	public static TextureRegion arrow;
 	public static TextureRegion logo;
 	public static TextureRegion gameOver;
+	public static TextureRegion spring;
 
 	public static Animation idleAnim;
 	public static Animation throwAnim;
@@ -50,22 +51,19 @@ public class Assets {
 		soundOn = new TextureRegion(items, 64, 0, 64, 64);
 		arrow = new TextureRegion(items, 0, 64, 64, 64);
 		platform = new TextureRegion(items, 64, 160, 64, 16);
-		
-		idleAnim = new Animation(0.2f,
-				new TextureRegion(items, 0, 128, 32, 32), new TextureRegion(
-						items, 32, 128, 32, 32));
-		lookAnim = new Animation(0.2f,
-				new TextureRegion(items, 64, 128, 32, 32), new TextureRegion(
-						items, 96, 128, 32, 32));
-		hittedAnim = new Animation(0.2f, new TextureRegion(items, 128, 128, 32,
-				32));
-//		platform = new Animation(0.2f,new TextureRegion(items, 64, 160, 64, 16));
-		breakingPlatform = new Animation(0.2f, new TextureRegion(items, 64,
-				160, 64, 16), new TextureRegion(items, 64, 176, 64, 16),
-				new TextureRegion(items, 64, 192, 64, 16), new TextureRegion(
-						items, 64, 208, 64, 16));
+		spring = new TextureRegion(items, 128, 32, 32, 32);
 
-		font = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font.png"), false);
+		idleAnim = new Animation(0.2f,new TextureRegion(items, 0, 128, 32, 32), new TextureRegion(items, 32, 128, 32, 32));
+		lookAnim = new Animation(0.2f,new TextureRegion(items, 64, 128, 32, 32), new TextureRegion(items, 96, 128, 32, 32));
+		hittedAnim = new Animation(0.2f, new TextureRegion(items, 128, 128, 32,32));
+		// platform = new Animation(0.2f,new TextureRegion(items, 64, 160, 64,
+		// 16));
+		breakingPlatform = new Animation(0.2f, new TextureRegion(items, 64,160, 64, 16), 
+				new TextureRegion(items, 64, 176, 64, 16),
+				new TextureRegion(items, 64, 192, 64, 16), 
+				new TextureRegion(items, 64, 208, 64, 16));
+
+		font = new BitmapFont(Gdx.files.internal("font.fnt"),Gdx.files.internal("font.png"), false);
 
 		music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
 		music.setLooping(true);

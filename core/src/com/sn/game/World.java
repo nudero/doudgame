@@ -13,6 +13,7 @@ import com.sn.game.component.PlatformComponent;
 import com.sn.game.component.StateComponent;
 import com.sn.game.component.TextureComponent;
 import com.sn.game.component.TransformComponent;
+import com.sn.game.system.BobSystem;
 
 public class World {
 
@@ -29,13 +30,28 @@ public class World {
 	
 	public void create() {
 		createBob();
-		createBall();
 		createBackground();
 		createPlatform();
 	}
 	
-	public void createBall() {
+	public Entity createBall() {
+		Entity ball = engine.createEntity();
+		TextureComponent texture = engine.createComponent(TextureComponent.class);
+		TransformComponent transform = engine.createComponent(TransformComponent.class);
+		BoundsComponent bounds = engine.createComponent(BoundsComponent.class);
+		MovementComponent movement = engine.createComponent(MovementComponent.class);
 		
+		texture.region = Assets.spring;
+		bounds.bounds.width = texture.region.getRegionWidth()/32.0f;
+		bounds.bounds.height = texture.region.getRegionHeight()/32.0f;
+		
+		ball.add(texture);
+		ball.add(transform);
+		ball.add(bounds);
+		ball.add(movement);
+		engine.addEntity(ball);
+		
+		return ball;
 	}
 	
 	public void createPlatform() {
@@ -49,7 +65,7 @@ public class World {
 		platform.width = texture.region.getRegionWidth()/32.0f;
 		platform.height = texture.region.getRegionHeight()/32.0f;
 		platform.velocity = 4;
-		transform.pos.set(5.0f, 8.0f, 0);
+		transform.pos.set(5.0f, 8.0f, 2.0f);
 		movement.velocity.x = rand.nextBoolean()?platform.velocity:-platform.velocity;
 
 		entity.add(platform);
@@ -90,7 +106,7 @@ public class World {
 		bounds.bounds.width = BobComponent.WIDTH;
 		bounds.bounds.height = BobComponent.HEIGHT;
 		
-		transform.pos.set(5.0f, 3.0f, 0.0f);
+		transform.pos.set(5.0f, 3.0f, 2.0f);
 		
 		state.set(BobComponent.STATE_IDLE);
 		
@@ -103,6 +119,7 @@ public class World {
 		
 		engine.addEntity(entity);
 		
+		engine.getSystem(BobSystem.class).createBall(entity);
 		
 		return entity;
 	}

@@ -5,7 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.sn.game.system.BackgroundSystem;
+import com.sn.game.system.BobSystem;
+import com.sn.game.system.GravitySystem;
 import com.sn.game.system.MovementSystem;
 import com.sn.game.system.PlatformSystem;
 import com.sn.game.system.RenderingSystem;
@@ -18,6 +21,8 @@ public class GameScreen extends ScreenAdapter {
 	OrthographicCamera guiCam;
 	
 	public GameScreen(DoudGame game) {
+		Gdx.input.setInputProcessor(null);
+		
 		this.game = game;
 		Assets.music.play();
 		
@@ -31,6 +36,8 @@ public class GameScreen extends ScreenAdapter {
 		engine.addSystem(new AnimationSystem());
 		engine.addSystem(new MovementSystem());
 		engine.addSystem(new PlatformSystem());
+		engine.addSystem(new BobSystem(world, engine));
+		engine.addSystem(new GravitySystem());
 		engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 		world.create();
 	}
@@ -48,6 +55,13 @@ public class GameScreen extends ScreenAdapter {
 //		game.batcher.draw(Assets.logo, 160 - 270 / 2, 240 - 32 / 2);
 		Assets.font.draw(game.batcher, "7", 320-30, 480 - 10);
 		game.batcher.end();
+	}
+	
+	
+
+	@Override
+	public void show() {
+		super.show();
 	}
 
 	@Override
